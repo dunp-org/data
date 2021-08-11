@@ -1,0 +1,25 @@
+{
+  "name": "@dunp/data",
+  "version": "0.0.1",
+  "description": "dunp protocol data layer",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dunp-org/data.git"
+  },
+  "keywords": [
+    "dunp",
+    "data"
+  ],
+  "author": "prc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dunp-org/data/issues"
+  },
+  "homepage": "https://dunp.org",
+  "dependencies": {
+  }
+}
