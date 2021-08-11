@@ -21,5 +21,10 @@
   },
   "homepage": "https://dunp.org",
   "dependencies": {
+    "@dunp/identity": "file:../identity",
+    "@dunp/replicator": "file:../replicator",
+    "@dunp/resolver": "file:../resolver",
+    "ipfs": "^0.55.2",
+    "orbit-db": "^0.26.1"
   }
 }

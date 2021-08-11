@@ -1,6 +1,4 @@
+export { default } from './src/data';
 
-
-// Data
-export default class Data {
-
-}
+export { default as Profile } from './src/profile';
+export { default as Portfolio } from './src/portfolio';
