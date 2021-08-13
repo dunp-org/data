@@ -7,6 +7,7 @@ import { validateSlug } from './utils';
 import config from '../config';
 import Settings from './settings';
 import Profile from './profile';
+import Portfolio from './portfolio';
 
 
 // dunp data store
@@ -88,6 +89,18 @@ export default class Data extends EventEmitter {
 
   async profileFromAddress(address) {
     const store = await Profile.fromAddress(this, address);
+    return store;
+  }
+
+  // Portfolio
+  async portfolio(type, modifier, identity) {
+    const store = new Portfolio(this, { type, modifier, identity });
+    await store.open();
+    return store;
+  }
+
+  async portfolioFromAddress(address) {
+    const store = await Portfolio.fromAddress(this, address);
     return store;
   }
 
