@@ -8,6 +8,7 @@ import config from '../config';
 import Settings from './settings';
 import Profile from './profile';
 import Portfolio from './portfolio';
+import Content from './content';
 
 
 // dunp data store
@@ -74,6 +75,7 @@ export default class Data extends EventEmitter {
   get orbitdb() { return this._orbitdb; }
 
   // Settings
+
   async settings(appIdentity) {
     const store = new Settings(this, { identity: appIdentity });
     await store.open();
@@ -81,6 +83,7 @@ export default class Data extends EventEmitter {
   }
 
   // Profile
+
   async profile(identity) {
     const store = new Profile(this, { identity });
     await store.open();
@@ -93,6 +96,7 @@ export default class Data extends EventEmitter {
   }
 
   // Portfolio
+
   async portfolio(type, modifier, identity) {
     const store = new Portfolio(this, { type, modifier, identity });
     await store.open();
@@ -104,4 +108,15 @@ export default class Data extends EventEmitter {
     return store;
   }
 
+  // Content
+
+  async content(portfolio, id) {
+    return new Content(this, { portfolio, id })
+  }
+
+  async contentFromAddress(address) {
+    const content = await Content.fromAddress(this, address);
+    await content.load();
+    return content;
+  }
 }
