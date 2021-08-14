@@ -59,23 +59,23 @@ export default class Store extends EventEmitter {
 
     switch (this.type) {
       case 'feed':
-        this.del = (hash) => { this._onlyOpen(); return this._db.del(hash); };
+        this.del = async (hash) => { this._onlyOpen(); return this._db.del(hash); };
       case 'eventlog':
         this.all = () => { this._onlyOpen(); return this._db.iterator({ limit: -1 }).collect().map(e => ({ _hash: e.hash, ...e.payload.value })); };
         this.get = (hash) => { this._onlyOpen(); const entry = this._db.get(hash); return { _hash: entry.hash, ...entry.payload.value } };
-        this.add = (data) => { this._onlyOpen(); return this.validate(data) ? this._db.add(data) : null; };
+        this.add = async (data) => { this._onlyOpen(); return this.validate(data) ? this._db.add(data) : null; };
         break;
       case 'docstore':
         this.all = () => { this._onlyOpen(); return this._db.query(() => true); };
         this.get = (key) => { this._onlyOpen(); const res = this._db.get(key, true); return res.length > 0 ? res[0] : null };
-        this.set = (key, value) => { this._onlyOpen(); return this.validate(key, value) ? this._db.put({ ...value, _id: key }) : null; };
-        this.del = (key) => { this._onlyOpen(); return this.validate(key) ? this._db.del(key) : null; };
+        this.set = async (key, value) => { this._onlyOpen(); return this.validate(key, value) ? this._db.put({ ...value, _id: key }) : null; };
+        this.del = async (key) => { this._onlyOpen(); return this.validate(key) ? this._db.del(key) : null; };
         break;
       case 'keyvalue':
         this.all = () => { this._onlyOpen(); return this._db.all; };
         this.get = (key) => { this._onlyOpen(); return this._db.get(key); };
-        this.set = (key, value) => { this._onlyOpen(); return this.validate(key, value) ? this._db.set(key, value) : null; };
-        this.del = (key) => { this._onlyOpen(); return this.validate(key) ? this._db.del(key) : null; };
+        this.set = async (key, value) => { this._onlyOpen(); return this.validate(key, value) ? this._db.set(key, value) : null; };
+        this.del = async (key) => { this._onlyOpen(); return this.validate(key) ? this._db.del(key) : null; };
         break;
       default:
         throw new Error('unknown data store type');

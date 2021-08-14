@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import Store from './store';
 import { checkRequired, checkValid } from './utils/validation';
 
@@ -10,6 +12,9 @@ export default class Profile extends Store {
     super(data, { type: 'docstore', names: ['profile'], identity, db });
 
     this.validate = (key, value) => {
+      // Add id if missing
+      if (!value.id) value.id = nanoid(12);
+      // Perform other validations
       if (![Profile.DEFAULT, this._data.app].includes(key)) throw new Error(`profile '${key}' not accessible`);
       if (value) {
         checkRequired(REQUIRED, value);

@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import Store from './store';
 import { checkRequired, checkValid } from './utils/validation';
 
@@ -30,6 +32,9 @@ export default class Portfolio extends Store {
     super(data, { type: 'feed', names: [portfolio], identity, db });
 
     this.validate = (data) => {
+      // Add id if missing
+      if (!data.id) data.id = nanoid(12);
+      // Perform other validations
       checkRequired(REQUIRED, data);
       checkValid(VALID, data);
       return true;
