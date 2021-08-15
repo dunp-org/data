@@ -21,9 +21,7 @@
   },
   "homepage": "https://dunp.org",
   "dependencies": {
-    "@dunp/identity": "file:../identity",
-    "@dunp/replicator": "file:../replicator",
-    "@dunp/resolver": "file:../resolver",
+    "@dunp/identity": "0.0.1",
     "ipfs": "^0.55.2",
     "jquery": "^3.6.0",
     "nanoid": "^3.1.25",
